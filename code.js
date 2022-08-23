@@ -7,20 +7,20 @@ let datosPersona = {
 };
 
 const listado = [{
-    imgUrl: "https://huguidugui.files.wordpress.com/2015/03/html1.png",
-    lenguajes: "HTML y CSS",
-    bimestre: "1er bimestre",
-  },
-  {
-    imgUrl: "https://jherax.files.wordpress.com/2018/08/javascript_logo.png",
-    lenguajes: "Javascript",
-    bimestre: "2do bimestre",
-  },
-  {
-    imgUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/React.svg/1200px-React.svg.png",
-    lenguajes: "React JS",
-    bimestre: "3er bimestre",
-  },
+  imgUrl: "https://huguidugui.files.wordpress.com/2015/03/html1.png",
+  lenguajes: "HTML y CSS",
+  bimestre: "1er bimestre",
+},
+{
+  imgUrl: "https://jherax.files.wordpress.com/2018/08/javascript_logo.png",
+  lenguajes: "Javascript",
+  bimestre: "2do bimestre",
+},
+{
+  imgUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/React.svg/1200px-React.svg.png",
+  lenguajes: "React JS",
+  bimestre: "3er bimestre",
+},
 ];
 
 const profileBtn = document.querySelector("#completar-perfil");
@@ -36,12 +36,12 @@ cambiarTema.addEventListener("click", alternarColorTema);
 function obtenerDatosDelUsuario() {
   /* --------------- PUNTO 1: Escribe tu codigo a partir de aqui --------------- */
   let fechaDeHoy = new Date();
-  let annoActual = fechaDeHoy.getFullYear(); 
+  let annoActual = fechaDeHoy.getFullYear();
   datosPersona.nombre = prompt("Ingresa tu nombre");
   let anno = parseInt(prompt("Ingresa el año en que naciste"));
-  datosPersona.edad = annoActual-anno;
+  datosPersona.edad = annoActual - anno;
   datosPersona.ciudad = prompt("Ingresa la ciudad donde vives");
-  datosPersona.interesPorJs = confirm("¿Te interesa JavaScript?");
+  confirm("¿Te interesa JavaScript?") ? datosPersona.interesPorJs = "Si" : datosPersona.interesPorJs = "No"
   console.log(datosPersona)
   return datosPersona;
 }
@@ -56,12 +56,19 @@ function renderizarDatosUsuario() {
   document.getElementById("ciudad").innerText = datosPersona.ciudad
   document.getElementById("javascript").innerText = datosPersona.interesPorJs
 
-  // let template = document.querySelectorAll(".card-header span");
-  // for (let index = 0; index < template.length; index++) {
-  //   const element = template[index].
-    
+  // let info = []
+  // i = 0;
+  // for (const key in datosPersona) {
+  //   info[i] = datosPersona[key]
+  //   i++;
   // }
-  
+
+  // let datosEnPantalla = document.querySelectorAll(".card-header span")
+  // for (let index = 0; index < datosEnPantalla.length; index++) {
+  //   const dato = datosEnPantalla[index];
+  //   dato.innerText = info[index]
+  // }
+
 }
 
 
@@ -70,15 +77,15 @@ function recorrerListadoYRenderizarTarjetas() {
   for (let index = 0; index < listado.length; index++) {
     const materia = listado[index];
     createMateria(materia.imgUrl, materia.lenguajes, materia.bimestre)
-
-} 
+  }
+  materiasBtn.removeEventListener("click", recorrerListadoYRenderizarTarjetas);
 }
 
 
-function createMateria(imagen, lenguajes, bimestre){
+function createMateria(imagen, lenguajes, bimestre) {
   const postTemplate = `
           <div class="caja">
-          <img src="${imagen}">
+          <img src="${imagen}" alt = "${lenguajes}">
           <h2 class = "languajes">${lenguajes}</h2>
           <p class = "bimestre">${bimestre}</p>
           </div>
@@ -89,8 +96,9 @@ function createMateria(imagen, lenguajes, bimestre){
 
 function alternarColorTema() {
   /* --------------------- PUNTO 4: Escribe tu codigo aqui --------------------- */
- 
-  
+  let body = document.getElementById("sitio")
+  body.classList.toggle("dark")
+
 
 
 }
