@@ -42,7 +42,6 @@ function obtenerDatosDelUsuario() {
   datosPersona.edad = annoActual - anno;
   datosPersona.ciudad = prompt("Ingresa la ciudad donde vives");
   confirm("¿Te interesa JavaScript?") ? datosPersona.interesPorJs = "Si" : datosPersona.interesPorJs = "No"
-  console.log(datosPersona)
   return datosPersona;
 }
 
@@ -50,37 +49,24 @@ function renderizarDatosUsuario() {
   /* ------------------- NO TOCAR NI ELIMINAR ESTA FUNCION. ------------------- */
   obtenerDatosDelUsuario();
   /* --------------- PUNTO 2: Escribe tu codigo a partir de aqui --------------- */
+  let arregloSpans = document.querySelectorAll(".card-header span")
+  let arregloPersona = Object.keys(datosPersona).map(
+    function(key) {
+      return datosPersona[key];
+    });
 
-  document.getElementById("nombre").innerText = datosPersona.nombre
-  document.getElementById("edad").innerText = datosPersona.edad
-  document.getElementById("ciudad").innerText = datosPersona.ciudad
-  document.getElementById("javascript").innerText = datosPersona.interesPorJs
-
-  // let info = []
-  // i = 0;
-  // for (const key in datosPersona) {
-  //   info[i] = datosPersona[key]
-  //   i++;
-  // }
-
-  // let datosEnPantalla = document.querySelectorAll(".card-header span")
-  // for (let index = 0; index < datosEnPantalla.length; index++) {
-  //   const dato = datosEnPantalla[index];
-  //   dato.innerText = info[index]
-  // }
-
+  arregloSpans.forEach((element, index) => {
+    element.innerText = arregloPersona[index];
+  });
 }
-
 
 function recorrerListadoYRenderizarTarjetas() {
   /* ------------------ PUNTO 3: Escribe tu codigo desde aqui ------------------ */
-  for (let index = 0; index < listado.length; index++) {
-    const materia = listado[index];
-    createMateria(materia.imgUrl, materia.lenguajes, materia.bimestre)
-  }
+  listado.forEach(element =>{
+    createMateria(element.imgUrl, element.lenguajes, element.bimestre)
+  })
   materiasBtn.removeEventListener("click", recorrerListadoYRenderizarTarjetas);
 }
-
 
 function createMateria(imagen, lenguajes, bimestre) {
   const postTemplate = `
@@ -93,15 +79,17 @@ function createMateria(imagen, lenguajes, bimestre) {
   document.querySelector("#fila").innerHTML += postTemplate;
 }
 
-
 function alternarColorTema() {
   /* --------------------- PUNTO 4: Escribe tu codigo aqui --------------------- */
   let body = document.getElementById("sitio")
   body.classList.toggle("dark")
-
-
-
 }
 
 /* --------------------- PUNTO 5: Escribe tu codigo aqui --------------------- */
+window.addEventListener("keydown", function(event){
+  if(event.key=="f"){
+    this.document.getElementById("sobre-mi").classList.remove("oculto")
+  }
+})
+
 
